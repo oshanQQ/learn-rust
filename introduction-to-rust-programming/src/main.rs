@@ -4,6 +4,13 @@ struct Person {
 }
 
 impl Person {
+    fn new(name: &str, age: u32) -> Person {
+        Person {
+            name: String::from(name),
+            age: age,
+        }
+    }
+
     fn say_name(&self) -> &Self {
         println!("I am {}", self.name);
         self
@@ -16,10 +23,7 @@ impl Person {
 }
 
 fn main() {
-    let p = Person {
-        name: String::from("Ahiahi"),
-        age: 20,
-    };
+    let p = Person::new("Ahiahi", 20);
 
     p.say_name();
     p.say_age();
