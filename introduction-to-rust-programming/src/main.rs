@@ -1,31 +1,35 @@
-struct Person {
-    name: String,
-    age: u32,
+enum Emotion {
+    Anger,
+    Happy,
 }
 
-impl Person {
-    fn new(name: &str, age: u32) -> Person {
-        Person {
-            name: String::from(name),
-            age: age,
-        }
-    }
+trait Emotional {
+    fn get_happy(&mut self) -> String;
+    fn get_anger(&mut self) -> String;
+    fn tell_state(&mut self) -> String;
+}
 
-    fn say_name(&self) -> &Self {
-        println!("I am {}", self.name);
-        self
-    }
+struct HappyPerson {
+    name: String,
+    state: Emotion,
+}
 
-    fn say_age(&self) -> &Self {
-        println!("I am {} year(s) old", self.age);
-        self
+impl Emotional for HappyPerson {
+    fn get_anger(&mut self) -> String {
+        unimplemented!()
+    }
+    fn get_happy(&mut self) -> String {
+        format!("{} is always happy.", self.name)
+    }
+    fn tell_state(&mut self) -> String {
+        todo!()
     }
 }
 
 fn main() {
-    let p = Person::new("Ahiahi", 20);
-
-    p.say_name();
-    p.say_age();
-    p.say_name().say_age();
+    let mut p = HappyPerson {
+        name: "ahiahi".to_string(),
+        state: Emotion::Happy,
+    };
+    println!("{}", p.get_happy());
 }
